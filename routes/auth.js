@@ -1,11 +1,7 @@
 const express = require("express");
-
 const { check, body } = require("express-validator");
 
-//const { check } = require("express-validator/check");
-
 const authController = require("../controllers/auth");
-
 const User = require("../models/user");
 
 const router = express.Router();
@@ -19,12 +15,9 @@ router.post(
   [
     body("email")
       .isEmail()
-      .withMessage("Please enter a valid email.")
+      .withMessage("Please enter a valid email address.")
       .normalizeEmail(),
-    body(
-      "password",
-      "Please enter a password with only numbers and text and at least 5 characters."
-    )
+    body("password", "Password has to be valid.")
       .isLength({ min: 5 })
       .isAlphanumeric()
       .trim(),
